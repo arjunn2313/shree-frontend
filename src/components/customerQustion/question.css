@@ -1,0 +1,26 @@
+.question{
+    width: 100%;
+}
+
+ .qstn-con {
+    width: 75%;
+ 
+ }
+
+ .qstn-con{
+    /* background-color: rgba(201, 203, 204, 0.3); */
+    border-radius: 20px;
+ 
+ }
+ 
+ .content h6{
+    font-weight: 600;
+    font-size: 18px;
+    color: rgba(50, 51, 52, 1);
+     
+   
+ }
+
+ .content p{
+    font-size: 14px;
+ }

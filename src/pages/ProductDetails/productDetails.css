@@ -1,0 +1,16 @@
+.product-buttons{
+    display: flex;
+    justify-content:start;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-buttons button{
+    border: none;
+    padding: 10px 15%;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+
+ 

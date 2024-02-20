@@ -1,0 +1,62 @@
+.dragandDrop{
+    position: absolute;
+    z-index: 10;  
+  top: 50%;  
+  left: 50%;  
+  transform: translate(-50%, -50%);
+    width: 60%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    
+}
+
+
+
+.drop-containor{
+    width: 90%;
+    height: 75%;
+    border: 2px dashed #005226 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+}
+
+.drag-icon{
+    font-size: 60px;
+    color: #005226;
+}
+.drop-containor input{
+    display: none;
+}
+
+.selcted-img{
+   width: 120px;
+    position: relative;
+   
+}
+
+.selcted-img img{
+    width: 100px;
+    height: 80px;
+}
+.close-button{
+    position: absolute;
+    right: 0;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.droped-img{
+    display: flex;
+  
+}
+
+ 

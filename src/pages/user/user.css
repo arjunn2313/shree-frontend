@@ -1,0 +1,55 @@
+.create-account{
+    box-shadow: 0 0 10px  rgba(0, 0, 0, 0.1);
+}
+
+ 
+
+.image-edit {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.685);
+   color: white;
+   border: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 3px;
+   padding: 2px;
+}
+
+.otp-btn{
+ border: none;
+ padding: 10px 40px;
+ color: #fff;
+ background-color: #005226;
+ border-radius: 20px;
+}
+
+.otp-inp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.otp-inp input{
+    width: 60px;
+    height: 65px;
+    border: 1px solid rgba(119, 136, 153, 0.425);
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+}
+
+.text-area-like{
+   
+    resize: none;
+}
+
+.profile-savebtn button{
+    border: none;
+    padding: 5px 25px;
+    border-radius: 5px;
+}
+
+.others{
+    box-shadow: 0 0 15px  rgba(0, 0, 0, 0.1);
+}

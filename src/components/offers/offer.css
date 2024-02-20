@@ -1,0 +1,56 @@
+.offer{
+    margin-top: 5%;
+    background-color: #0052262c;
+}
+
+/* .offer-wrapper{
+    width: 95%;
+    margin: auto;
+} */
+.offer-wrapper{
+  display: flex ;
+  align-items: center;
+ 
+}
+
+.offer-timer div{
+ background:#fff;
+  width: 100px;
+  height: 100px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.offer-title{
+    display: flex;
+    flex-direction: column; 
+     gap: 25px;
+}
+
+.offer-title h2{
+ font-size: 46px;
+}
+
+.offer-title p{
+    color: rgb(7, 7, 7);
+    font-size: 22px;
+}
+
+.offer-btn button{
+    margin-top: 10px;
+    border: none;
+    padding: 15px 40px;
+    color: #fff;
+    background-color:#005226;
+    border-radius: 10px;
+}
+
+.ss{
+    z-index: -999;
+    position: absolute;
+    bottom: 0;
+    right: 55%;
+
+}

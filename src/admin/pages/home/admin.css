@@ -1,0 +1,105 @@
+#admin-search{
+    background-color: #BFFFEA33;
+}
+
+.sideBar{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    justify-content: space-between;
+    padding: 2% 0;
+    align-items: center;
+}
+
+.sidebar-child1{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+}
+
+.menu-item{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-item:hover{
+    background-color: rgba(128, 128, 128, 0.092);
+}
+
+.active-link{
+    color: #005226;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+}
+
+.dash-con{
+    display: flex;
+    width: 100%;
+    min-height: 90vh;
+    
+}
+
+.dash{
+    background-color: #BFFFEA33;
+    width:100%;
+ 
+}
+
+.dash-home{
+    
+    display: flex;
+    justify-content: space-around;
+}
+
+.product-details{
+display: flex;
+align-items: center;
+gap: 15px;
+width: 20%;
+padding: 10px;
+border-radius: 15px;
+color: #005226;
+}
+
+.count{
+    font-weight: 600;
+}
+
+.cat{
+    color: gray;
+    font-size: 12px;
+}
+
+/* order and stock */
+
+.order-stock{
+    margin: 10px auto;
+    width: 95%;
+ 
+    display: flex;
+    justify-content:space-between;
+}
+
+.orderss{
+    border:1px solid; width: 65%;
+}
+
+.stockss{
+    background-color: #fff;
+    width: 30%;
+     
+    border-radius: 10px;
+}
+
+.expense-containor{
+    margin: 10px auto;
+    width: 95%;
+    background-color: #fff;
+    border-radius: 10px;
+}

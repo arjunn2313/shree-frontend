@@ -1,0 +1,19 @@
+ 
+.featured h2{
+    font-weight: 600;
+    font-size: 44px;
+}
+
+.featuredCat span{
+font-size: 24px;
+font-weight: 500;
+padding: 10px 30px;
+border-radius: 25px;
+border: 1px solid gray ;
+}
+
+.product_card{
+    width: 95%;
+}
+
+ 
