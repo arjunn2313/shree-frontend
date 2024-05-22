@@ -17,6 +17,10 @@
     gap: 30px;
 
 }
+.pie-color{
+    width: 30px;
+    height: 30px;
+}
 
 .menu-item{
     padding: 5px;
@@ -41,7 +45,7 @@
 .dash-con{
     display: flex;
     width: 100%;
-    min-height: 90vh;
+    min-height: 85vh;
     
 }
 
@@ -80,7 +84,7 @@ color: #005226;
 
 .order-stock{
     margin: 10px auto;
-    width: 95%;
+   height: fit-content;
  
     display: flex;
     justify-content:space-between;
@@ -90,16 +94,30 @@ color: #005226;
     border:1px solid; width: 65%;
 }
 
-.stockss{
+/* .stockss{
     background-color: #fff;
     width: 30%;
      
     border-radius: 10px;
-}
+} */
 
 .expense-containor{
     margin: 10px auto;
-    width: 95%;
+    
     background-color: #fff;
     border-radius: 10px;
 }
+
+/* .BColor{
+    background-color: rgba(0, 82, 38, 1);
+  } */
+  
+.textColor{
+     color: rgba(0, 82, 38, 1);
+  }
+  
+  /* .searchBorder{
+     border: 1px solid rgba(0, 82, 38, 1);
+  }
+    */
+   

@@ -1,32 +1,39 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { api } from "../../../api/api";
+import { adminConfig, api } from "../../../api/api";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaPlus } from "react-icons/fa";
 
 export default function ViewAllAdvertisment() {
   const navigate = useNavigate();
   const [advertisment, setAdvertisment] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${api}/advertisment/getAll`,adminConfig);
+      setAdvertisment(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get(`${api}/advertisment/getAll`)
-      .then((res) => {
-        setAdvertisment(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },[]);
+    fetchData();
+  }, []);
 
   const handleDelete = async (id) => {
     try {
-      const deleteItem = await axios.delete(
-        `http://localhost:6060/advertisment/delete/${id}`
-      );
+      const deleteItem = await axios.delete(`${api}/advertisment/delete/${id}`,adminConfig);
       if (deleteItem) {
-        toast.success("Successfully deleted");
+        toast.success("Successfully deleted", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
+        fetchData()
       }
     } catch (error) {
       console.log(error);
@@ -35,17 +42,21 @@ export default function ViewAllAdvertisment() {
 
   console.log(advertisment);
   return (
-    <div className="px-5 py-3">
-      <div className="advertismentButton d-flex justify-content-end">
-        <button className="btn btn-success" onClick={() => navigate("add")}>
+    <div className="container mt-3">
+      <div className="advertismentButton d-flex justify-content-end p-3">
+        <button
+          className="btn btn-success col-md-2 d-flex justify-content-center align-items-center gap-2"
+          onClick={() => navigate("add")}
+        >
+          <FaPlus size={20} />
           Add Product
         </button>
       </div>
 
-      <div className="row gap-4 d-flex justify-content-center mt-2">
-        {advertisment &&
-          advertisment.map((product, index) => (
-            <div className="bg-white col-5 py-2 rounded-3" key={product._id}>
+      <div className="row mt-4">
+        {advertisment.map((product, index) => (
+          <div className="col-lg-6 col-md-12 mb-4 " key={product._id}>
+            <div className="bg-white py-2 rounded-3 p-3">
               <p className="TColor fw-medium">Product No. : 0{index + 1}</p>
 
               <div className="d-flex gap-5 border-bottom pb-3">
@@ -64,7 +75,7 @@ export default function ViewAllAdvertisment() {
 
               <div className="row py-1">
                 <div
-                  className="col-6 d-flex justify-content-center align-items-center gap-2 p-3  border-end text-danger fw-medium"
+                  className="col-6 d-flex justify-content-center align-items-center gap-2 p-3 border-end text-danger fw-medium"
                   style={{ cursor: "pointer" }}
                   onClick={() => handleDelete(product._id)}
                 >
@@ -75,14 +86,15 @@ export default function ViewAllAdvertisment() {
                 <div
                   className="col-6 d-flex justify-content-center align-items-center gap-2 p-3 text-success fw-medium"
                   style={{ cursor: "pointer" }}
-                  onClick={()=>navigate(`add/${product._id}`)}
+                  onClick={() => navigate(`add/${product._id}`)}
                 >
                   <CiEdit />
                   <span>Edit</span>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );

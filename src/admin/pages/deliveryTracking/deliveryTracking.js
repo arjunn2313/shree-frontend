@@ -84,7 +84,7 @@ export default function DeliveryTracking() {
                :
                <td className="text-success" 
                onClick={() =>{
-                setId(product?.userID?.firstName)
+                setId(product?._id)
                 setLgShow(true)
                } }
                style={{ textDecoration: "underline",cursor:"pointer"}}>Enter track Id</td>

@@ -70,7 +70,34 @@
          flex-direction: column;
          align-items: center;
     }
-
+    .contact-num p{
+         font-size: 10px;
+    }
 }
  
+@media (max-width:480px){
+    #footer-logo{
+        height: 80px;
+    }
+    .footer-title p{
+        font-size: 10px;
+        padding-top: 0px;
+        line-height: 1.2rem;
+    }
+    .footer-cat-h{
+        font-size: 13px;
+    }
+    .footer-list{
+      font-size: 10px;
+    }
+    .footer-child-2{
+      
+        font-size: 8px;
+        font-weight: 300;
+        padding: 0 0;
+        width: 100%;
+       
+    }
+ 
+}
  

@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { api } from "../../../api/api";
 
 export default function SingleOrder() {
   const { id } = useParams();
   const [orders, setOrders] = useState({});
+  const navigate = useNavigate()
 
   useEffect(() => {
-    axios.get(`http://localhost:6060/order/getsingle/${id}`).then((res) => {
+    axios.get(`${api}/order/getsingle/${id}`).then((res) => {
       console.log(res.data);
       setOrders(res.data);
     });
@@ -98,7 +100,7 @@ export default function SingleOrder() {
       </div>
 
       <div className="d-flex float-end py-4">
-        <button className="btn btn-success btn-lg">Generate Invoice</button>
+        <button className="btn btn-success btn-lg" onClick={()=>navigate('invoice')}>Generate Invoice</button>
       </div>
     </div>
   );

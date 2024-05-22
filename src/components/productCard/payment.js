@@ -5,41 +5,43 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { createAnOrder } from "../../services/user/userSlice";
 import { useNavigate } from "react-router-dom";
- 
- 
-export default function Payment({product}) {
-    const navigate = useNavigate()
-    const[down,setDown] = useState(true)
-    const[totalAmount,setTotalAmout] = useState(null)
-    const dispatch = useDispatch()
-    // const[paymentInfo,setPaymentInfo] = useState({
-    //   razorPayPaymentId:"",
-    //   razorPayOrderId:"",
-    // })
-    const[cartProductState,setCartProductState] = useState([])
-    useEffect(()=>{
-      let sum = 0;
-      for (let index = 0; index < product?.length; index++) {
-       sum = sum+(Number(product[index].quantity)*product[index].price)
-        setTotalAmout(sum)
-      }
-      },[product])
-      
-      console.log(product);
- 
-      useEffect(()=>{
-        let items=[]
-        for (let index = 0; index < product.length; index++) {
-          items.push({product:product[index].productId._id,
-            quantity:product[index].quantity,color:product[index].colorCode,image:product[index].image,
-          price:product[index].price,size:product[index].size
-          })
-        }
-   setCartProductState(items)
-      },[])
 
-  
- 
+export default function Payment({ product, user, address }) {
+  const navigate = useNavigate();
+  const [down, setDown] = useState(true);
+  const [totalAmount, setTotalAmout] = useState(null);
+  const dispatch = useDispatch();
+  // const[paymentInfo,setPaymentInfo] = useState({
+  //   razorPayPaymentId:"",
+  //   razorPayOrderId:"",
+  // })
+
+  const [cartProductState, setCartProductState] = useState([]);
+  useEffect(() => {
+    let sum = 0;
+    for (let index = 0; index < product?.length; index++) {
+      sum = sum + Number(product[index].quantity) * product[index].price;
+      setTotalAmout(sum);
+    }
+  }, [product]);
+
+  console.log(product);
+
+  useEffect(() => {
+    let items = [];
+    for (let index = 0; index < product.length; index++) {
+      items.push({
+        product: product[index].productId._id,
+        quantity: product[index].quantity,
+        color: product[index].colorCode,
+        image: product[index].image,
+        price: product[index].price,
+        size: product[index].size,
+      });
+    }
+    setCartProductState(items);
+  }, []);
+
   const upi = [
     {
       url: "assets/Group 1000001779 (1).svg",
@@ -59,8 +61,7 @@ export default function Payment({product}) {
       method: "PayPal",
     },
   ];
-
- 
+  console.log(user);
 
   const initPayment = (data) => {
     const options = {
@@ -75,20 +76,20 @@ export default function Payment({product}) {
         try {
           const verifyUrl = "http://localhost:6060/pay/verify";
           const { data } = await axios.post(verifyUrl, response);
-         const paymentInfo = await{
-          razorPayPaymentId:response.razorpay_order_id,
+          const paymentInfo = await {
+            razorPayPaymentId: response.razorpay_order_id,
             razorPayOrderId: response.razorpay_order_id,
-         }
+          };
 
-         dispatch(createAnOrder({
+          dispatch(
+            createAnOrder({
               totalPrice: totalAmount,
               orderItems: cartProductState,
-              paymentInfo 
-            }))
-         
-        navigate('/myorders')
-         
-          
+              paymentInfo,
+            })
+          );
+
+          navigate("/myorders");
         } catch (error) {
           console.log(error);
         }
@@ -97,30 +98,67 @@ export default function Payment({product}) {
         color: "#3399cc",
       },
     };
-  
+
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
-  
-
- 
 
   const handlePayment = async () => {
-		try {
-			const orderUrl = "http://localhost:6060/pay/orders";
-			const { data } = await axios.post(orderUrl, { amount:totalAmount + 15 });
-			console.log(data);
-			initPayment(data.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+    try {
+      const orderUrl = "http://localhost:6060/pay/orders";
+      const { data } = await axios.post(orderUrl, { amount: totalAmount + 15 });
+      console.log(data);
+      initPayment(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
-      <h6>Payment</h6>
+      {/* <h6>Shipping Address</h6> */}
 
       <div className="accordion " id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              className="btn btn-white border-0  w-100 fw-medium   d-flex justify-content-between"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne"
+              aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne"
+              onClick={() => setDown(!down)}
+            >
+              Shipping Address{" "}
+              <span>
+                {down ? (
+                  <IoIosArrowUp className="fs-5" />
+                ) : (
+                  <IoIosArrowDown className="fs-5" />
+                )}
+              </span>
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseOne"
+            class="accordion-collapse collapse show"
+          >
+            <div className="p-3 ">
+              <h6>
+                {user?.firstName} {user?.lastName}
+              </h6>
+              <p>{address.address}</p>
+              <p>
+                {address?.city},{address?.state},{address?.pincode}
+              </p>
+              <p>{address?.country}</p>
+              <p>phone - {user.phone}</p>
+              <p>Alternative - {user.phone}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* <div class="accordion-item">
           <h2 class="accordion-header">
             <button
               className="btn btn-white border-0  w-100 fw-medium   d-flex justify-content-between"
@@ -150,8 +188,8 @@ export default function Payment({product}) {
               </div>
             ))}
           </div>
-        </div>
-
+        </div> */}
+        {/* 
         <div class="accordion-item mt-3 border-top">
           <h2 class="accordion-header">
             <button
@@ -199,9 +237,14 @@ export default function Payment({product}) {
              
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <button className="btn btn-success mt-5" onClick={handlePayment}>PAY NOW</button>
+      <button
+        className="btn btn-success mt-5 d-block mx-auto col-4"
+        onClick={handlePayment}
+      >
+        PAY NOW
+      </button>
     </>
   );
 }

@@ -1,0 +1,25 @@
+.otp-input{
+    font-size: 16px;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid rgba(119, 136, 153, 0.425);
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+  }
+ 
+  @media (max-width: 764px) {
+    .otp-input {
+      font-size: 14px;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .otp-input {
+      width: 2rem; /* Adjust the width as needed */
+      height: 2rem; /* Adjust the height as needed */
+    }
+  }
+  

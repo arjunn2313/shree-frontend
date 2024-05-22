@@ -1,0 +1,28 @@
+.buynow-img{
+  width: 232px ;
+   height: 232px;
+}
+
+@media (max-width : 1200px) {
+    .buynow-img{
+        width: 200px ;
+         height: 200px;
+      }
+}
+
+@media (max-width : 992px) {
+    .buynow-img{
+        width: 170px ;
+         height:170px;
+      }
+}
+
+@media (max-width : 576px) {
+    .buynow-img{
+        width: 100px ;
+         height:100px;
+      }
+      .check-out{
+        font-size: 10px;
+      }
+}

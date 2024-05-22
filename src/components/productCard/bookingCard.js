@@ -25,8 +25,8 @@ export default function BookingCard({product}) {
     <div className="d-flex justify-content-between border-bottom pt-2 pb-4">
       <img
         src={`${api}/${product?.image}`}
-        style={{ width: "232px", height: "232px" }}
-        className="border rounded-2"
+       
+        className="border rounded-2 img-fluid buynow-img"
       />
 
       <div className="w-50 d-flex flex-column gap-4 ">
@@ -64,7 +64,7 @@ export default function BookingCard({product}) {
 
     <div className="row py-3">
 
-      <div className="col-5 text-end ">Total Checkout</div>
+      <div className="col-5 text-end check-out ">Total Checkout</div>
       <div className="col-7 text-end text-success fw-bold">Rs.{totalAmount+15}.00</div>
       
     </div>

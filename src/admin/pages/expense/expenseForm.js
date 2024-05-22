@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
-import { adminConfig } from "../../../api/api";
+import { adminConfig, api } from "../../../api/api";
 import { useDispatch } from "react-redux";
 import { getAllExpenses } from "../../../services/admin/adminSlice";
 
@@ -28,7 +28,7 @@ function ExpenseModal({ lgShow, setLgShow, id }) {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:6060/expense/getSingleExpense/${id}`,adminConfig)
+        .get(`${api}/expense/getSingleExpense/${id}`,adminConfig)
         .then((res) => {
           console.log(res.data);
           setExpense(res.data)
@@ -68,9 +68,13 @@ function ExpenseModal({ lgShow, setLgShow, id }) {
       // expense.date = currentDate;
       try {
         axios
-          .post("http://localhost:6060/expense/add", expense,adminConfig)
+          .post(`${api}/expense/add`, expense,adminConfig)
           .then(() => {
-            toast.success("New expense added");
+            toast.success("New expense added",{
+              autoClose:4000,
+              hideProgressBar:true,
+              position:"top-center"
+            });
             setExpense({
               category: "",
               subCategory: "",
@@ -91,8 +95,12 @@ function ExpenseModal({ lgShow, setLgShow, id }) {
 
   const handleUpdate = (e) =>{
     e.preventDefault()
-    axios.post(`http://localhost:6060/expense/updateExpense/${id}`,expense,adminConfig).then(()=>{
-      toast.success("updated")
+    axios.post(`${api}/expense/updateExpense/${id}`,expense,adminConfig).then(()=>{
+      toast.success("updated",{
+        autoClose:4000,
+        hideProgressBar:true,
+        position:"top-center"
+      })
       setLgShow(false)
       
         dispatch(getAllExpenses())

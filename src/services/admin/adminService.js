@@ -16,58 +16,88 @@ const adminLogin = async (adminData) => {
 };
 
 // Expense
-const getExpenses = async ({itemsPerPage, currentPage, search}) => {
+const getExpenses = async ({
+  itemsPerPage,
+  currentPage,
+  search,
+  startDate,
+  endDate,
+}) => {
   try {
-    const response = await axios.get(`${api}/expense/getAllExpenses?page=${currentPage}&limit=${itemsPerPage}&search=${search}`,adminConfig);
+    const url = `${api}/expense/getAllExpenses?page=${currentPage}&limit=${itemsPerPage}&search=${search}&startDate=${startDate}&endDate=${endDate}`;
+    const response = await axios.get(url, adminConfig);
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
+
 // orders
-const getAllOrders = async()=>{
+const getAllOrders = async () => {
   try {
-    const response = await axios.get(`${api}/order/get-allorders`,adminConfig);
-    if(response.data){
+    const response = await axios.get(`${api}/order/get-allorders`, adminConfig);
+    if (response.data) {
       return response.data;
     }
   } catch (error) {
     throw error;
   }
-}
+};
 
 // change status to dispatch
 
-const  changeOrderStatus = async({id,status})=>{
+const changeOrderStatus = async ({ id, status }) => {
   try {
-    const response = await axios.put(`${api}/order/dispatch/${id}/${status}`,adminConfig);
-    if(response.data){
+    const response = await axios.put(
+      `${api}/order/dispatch/${id}/${status}`,
+      adminConfig
+    );
+    if (response.data) {
       return response.data;
     }
   } catch (error) {
     throw error;
   }
-}
+};
 
 // get All dispatched products
 
-const getAllDispatched = async()=>{
+const getAllDispatched = async () => {
   try {
-    const response = await axios.get(`${api}/order/dispatched-orders`,adminConfig);
-    if(response.data){
+    const response = await axios.get(
+      `${api}/order/dispatched-orders`,
+      adminConfig
+    );
+    if (response.data) {
       return response.data;
     }
   } catch (error) {
     throw error;
   }
-}
+};
 
+// GET TOTAL STOCK
+
+const getTotalStock = async ({ itemsPerPage, currentPage, search,filter }) => {
+  try {
+    const response = await axios.get(
+      `${api}/product/totalstock/sum?page=${currentPage}&limit=${itemsPerPage}&search=${search}&sortOrder=${filter}`,
+      adminConfig
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const adminService = {
   adminLogin,
   getExpenses,
   getAllOrders,
   changeOrderStatus,
-  getAllDispatched
+  getAllDispatched,
+  getTotalStock,
 };

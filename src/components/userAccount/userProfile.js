@@ -7,11 +7,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { api, config } from "../../api/api";
 import { CiEdit } from "react-icons/ci";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
-
- 
 
 export default function UserProfile() {
   const isAuth = useSelector((state) => state.user.token);
@@ -31,28 +29,28 @@ export default function UserProfile() {
       })
       .then((res) => {
         setUserDetails(res.data);
-        console.log(userDetails)
+        console.log(userDetails);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  useEffect(()=>{
-    axios.get(`${api}/address`,{
-      headers : {
-        Authorization :`Bearer ${localStorage.token}`
-      }
-    }).then((res)=>{
-      setAddress(res.data)
-      console.log(res.data)
-    }).catch((error)=>{
-      console.log(error)
-    })
-  },[])
-
-  
-
+  useEffect(() => {
+    axios
+      .get(`${api}/address`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      })
+      .then((res) => {
+        setAddress(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -85,7 +83,7 @@ export default function UserProfile() {
   console.log(address);
 
   const handleSubmit = async () => {
-    handleClose()
+    handleClose();
     try {
       // Create FormData for user update
       const userFormData = new FormData();
@@ -93,29 +91,28 @@ export default function UserProfile() {
       userFormData.append("lastName", userDetails.lastName);
       userFormData.append("phone", userDetails.phone);
       userFormData.append("email", userDetails.email);
-      if(dpImg !== ""){
+      if (dpImg !== "") {
         userFormData.append("avatar", userDetails.avatar);
       }
-      
-      if(userFormData){
-        axios.post(`${api}/user/update`,userFormData,{
-          headers:{
-            Authorization : `Bearer ${localStorage?.token}`
-          }
-        })
+
+      if (userFormData) {
+        axios.post(`${api}/user/update`, userFormData, {
+          headers: {
+            Authorization: `Bearer ${localStorage?.token}`,
+          },
+        });
       }
 
-      if(address){
-        axios.post(`${api}/address`, address,{
-          headers:{
-            Authorization : `Bearer ${localStorage?.token}`
-          }
-        })
+      if (address) {
+        axios.post(`${api}/address`, address, {
+          headers: {
+            Authorization: `Bearer ${localStorage?.token}`,
+          },
+        });
       }
 
-     
       // const [updateUserResponse, addAddressResponse] = await axios.all([
-     
+
       //   axios.post(`${api}/address`, address,{
       //     headers:{
       //       Authorization : `Bearer ${localStorage.token}`
@@ -126,33 +123,29 @@ export default function UserProfile() {
       // // Handle responses
       // console.log("Update User Response:", updateUserResponse.data);
       // console.log("Add Address Response:", addAddressResponse.data);
- 
+
       //      window.location.reload();
 
-           toast.success("successfully Saved", {
-            position: "top-center"
-               });
+      toast.success("successfully Saved", {
+        position: "top-center",
+      });
       // If both requests were successful, you can redirect or perform other actions
     } catch (error) {
       console.error("Error during form submission:", error);
       toast.error("Error during form submission", {
-        position: "top-center"
-           });
+        position: "top-center",
+      });
     }
   };
-
-
-
 
   console.log(userDetails);
 
   return (
     <>
       <div className="container py-5 mt-5 rounded-3 create-account">
-        <h5 className=" ps-3">Personal Information</h5>
-        {/* details */}
-        <div className="row px-4 pt-3">
-          <div className="col-2 d-flex justify-content-center align-items-center">
+        <h5 className="ps-3">Personal Information</h5>
+        <div className="row px-2 pt-3">
+          <div className="col-lg-2  col-12 d-flex justify-content-center align-items-center">
             <div
               className="position-relative rounded-circle d-flex flex-column justify-content-center align-items-center"
               style={{ width: "150px", height: "150px", overflow: "hidden" }}
@@ -187,25 +180,25 @@ export default function UserProfile() {
             </div>
           </div>
 
-          <div className="col-5 d-flex flex-column justify-content-center align-items-start">
-            <label className="form-label mb-3 fs-5 fw-medium">
+          <div className="col-lg-5 col-md-6 col-12 d-flex flex-column justify-content-center align-items-start">
+            <label className="form-label mb-sm-3 fw-medium">
               First Name<span>*</span>
             </label>
             <input
               type="text"
-              className="form-control mb-4"
+              className="form-control mb-sm-4 mb-2"
               placeholder="Enter your first name"
               name="firstName"
               value={userDetails.firstName}
               onChange={handleChange}
             />
 
-            <label className="form-label mb-3 fs-5 fw-medium">
+            <label className="form-label mb-sm-3   fw-medium">
               Phone Number<span>*</span>
             </label>
             <input
               type="text"
-              className="form-control mb-4"
+              className="form-control  mb-sm-4 mb-2"
               placeholder="+91 98989 87878"
               name="phone"
               value={userDetails.phone}
@@ -213,19 +206,19 @@ export default function UserProfile() {
               disabled
             />
           </div>
-        
-          <div className="col-5 d-flex flex-column justify-content-center align-items-start">
-            <label className="form-label mb-3 fs-5 fw-medium">Last Name</label>
+
+          <div className="col-lg-5 col-md-6 col-12 d-flex flex-column justify-content-center align-items-start">
+            <label className="form-label mb-sm-3   fw-medium">Last Name</label>
             <input
               type="text"
-              className="form-control mb-4"
+              className="form-control mb-sm-4 mb-2"
               placeholder="Enter your first name"
               name="lastName"
               value={userDetails.lastName}
               onChange={handleChange}
             />
 
-            <label className="form-label mb-3 fs-5 fw-medium">
+            <label className="form-label mb-sm-3 fw-medium">
               Email<span>*</span>
             </label>
             <input
@@ -240,11 +233,8 @@ export default function UserProfile() {
         </div>
       </div>
 
-      {/* addres */}
-
       <div className="container px-3 py-5 mt-3 rounded-3 others">
-        <h5 className="">Address Details</h5>
-
+        <h5 className="fs-5">Address Details</h5>
         <div className="my-3">
           <label className="form-label">
             Address<span className="text-danger fw-bold">*</span>
@@ -258,15 +248,14 @@ export default function UserProfile() {
             onChange={handleAddress}
           ></textarea>
         </div>
-
         {/* ////////////////// */}
-        <div className="d-flex justify-content-between align-items-center mb-5 ">
+        <div className="d-flex justify-content-between align-items-center mb-sm-5 mb-2">
           <div style={{ width: "45%" }}>
             <label className="form-label">
               Pincode<span className="text-danger fw-bold">*</span>
             </label>
             <input
-             value={address.pincode}
+              value={address.pincode}
               type="text"
               className="form-control"
               placeholder="dummy content"
@@ -274,13 +263,12 @@ export default function UserProfile() {
               onChange={handleAddress}
             />
           </div>
-
           <div style={{ width: "45%" }}>
             <label className="form-label">
               City/District/Town<span className="text-danger fw-bold">*</span>
             </label>
             <input
-            value={address.city}
+              value={address.city}
               type="text"
               className="form-control"
               placeholder="dummy content"
@@ -289,15 +277,19 @@ export default function UserProfile() {
             />
           </div>
         </div>
-
         {/* ////////////////// */}
         <div className="d-flex justify-content-between align-items-center mb-5 ">
           <div style={{ width: "45%" }}>
             <label className="form-label">
               State<span className="text-danger fw-bold">*</span>
             </label>
-            <select
+            <input type="text" 
             value={address.state}
+            className="form-control"
+            name="state"
+            onChange={handleAddress}/>
+            {/* <select
+              value={address.state}
               class="form-select"
               aria-label="Default select example"
               name="state"
@@ -307,13 +299,12 @@ export default function UserProfile() {
               <option value="Tamilnadu">Tamilnadu</option>
               <option value="kerala">kerala</option>
               <option value="karanataka">karanataka</option>
-            </select>
+            </select> */}
           </div>
-
           <div style={{ width: "45%" }}>
             <label className="form-label">Landmark (optional)</label>
             <input
-            value={address.landmark}
+              value={address.landmark}
               type="text"
               className="form-control"
               placeholder="dummy content"
@@ -322,15 +313,20 @@ export default function UserProfile() {
             />
           </div>
         </div>
-
         {/* ////////////////// */}
         <div className="d-flex justify-content-between align-items-center  ">
           <div style={{ width: "45%" }}>
             <label className="form-label">
               Country<span className="text-danger fw-bold">*</span>
             </label>
-            <select
-            value={address.country}
+            <input
+            type="text"
+            className="form-control"
+            name="country"
+            onChange={handleAddress}
+            value={address.country}/>
+            {/* <select
+              value={address.country}
               class="form-select"
               aria-label="Default select example"
               name="country"
@@ -340,7 +336,7 @@ export default function UserProfile() {
               <option value="India">India</option>
               <option value="China">China</option>
               <option value="Canada">Canada</option>
-            </select>
+            </select> */}
           </div>
         </div>
       </div>
@@ -350,37 +346,28 @@ export default function UserProfile() {
           Discard
         </button>
         <button
-          className="text-white bg-success  fw-medium"
+          className="text-white bg-success fw-medium"
           onClick={handleShow}
-          // onClick={handleSubmit}
         >
           Save
         </button>
-        </div>
+      </div>
 
-
-        {/* modal */}
-
-        <>
-        {/* <Button variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button> */}
-  
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Confirmation</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Do you want to save your changes ?</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="success" onClick={handleSubmit}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+      {/* Modal */}
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Do you want to save your changes ?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleSubmit}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

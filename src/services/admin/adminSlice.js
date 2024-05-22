@@ -48,6 +48,14 @@ export const getDispatched = createAsyncThunk("admin/get/dispatche-orders",async
   }
 })
 
+export const getStocks = createAsyncThunk("admin/get/totalstock",async(params,thunkAPI)=>{
+  try {
+    return await adminService.getTotalStock(params)
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+})
+
 
 const initialState = {
   admin: "",
@@ -155,6 +163,20 @@ export const adminSlice = createSlice({
         if (state.isError === true) {
           toast.error(action.error);
         }
+      }).addCase(getStocks.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getStocks.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.totalstock = action.payload;
+      })
+      .addCase(getStocks.rejected, (state,action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
       })
   },
 });

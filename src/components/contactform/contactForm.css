@@ -12,6 +12,26 @@
     border-radius: 5px;
 }
 
+
 .contact-form{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width : 480px){
+    .contact-header{
+        font-size: 18px;
+    }
+    .contact-title{
+        font-size: 12px;
+    }
+    .contact-label{
+        font-size: 11px;
+    }
+    .contact-btn{
+   
+        padding: 5px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+    }
+    
 }

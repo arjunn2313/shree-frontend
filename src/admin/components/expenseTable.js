@@ -1,48 +1,77 @@
-import React from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { adminConfig, api } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function ExpenseTable() {
-  return (
-    <div className='expense-containor border border-success'>
-            <div className="d-flex justify-content-between p-4">
-          <h6>Expense</h6>
-          <button className="bg-white px-2 text-success border-success">View All</button>
-        </div>
+  const navigate = useNavigate();
+  const heading = [
+    "Sl.no.",
+    "Date",
+    "Category",
+    "Sub Category",
+    "Amount",
+    "Status",
+  ];
+  const [expense, setExpense] = useState([]);
 
-        <table class="table ">
+  useEffect(() => {
+    axios
+      .get(`${api}/expense/getAllExpenses/?limit=5`, adminConfig)
+      .then((res) => {
+        setExpense(res.data.expenses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(expense);
+  return (
+    <div className="expense-containor border border-success">
+      <div className="d-flex justify-content-between p-3">
+        <h6 className="textColor fw-medium fs-5">Expense</h6>
+        <button
+          className="btn border border-success textColor fw-medium"
+          onClick={() => navigate("expense")}
+        >
+          View All
+        </button>
+      </div>
+
+      <div className="table-responsive p-2">
+        <table className="table">
           <thead>
             <tr>
-              <th scope="col">Sl. no.</th>
-              <th scope="col">Name</th>
-              <th scope="col">Location</th>
-              <th scope="col">Mobile Number</th>
-              <th scope="col">Products</th>
+              {heading.map((head, i) => (
+                <th scope="col" key={i}>
+                  {head}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry the Bird</td>
-              <td>@mdo</td>
-              <td>@twitter</td>
-              <td>@mdo</td>
-             
-            </tr>
+            {expense?.map((expense, index) => (
+              <tr key={index}>
+                <th scope="row">{index + 1}</th>
+                <td>{new Date(expense.date).toLocaleDateString()}</td>
+                <td>{expense.category}</td>
+                <td>{expense.subCategory}</td>
+                <td>{expense.amount}</td>
+                <td
+                  className={
+                    expense.status === "paid"
+                      ? "text-success fw-medium"
+                      : "text-danger fw-medium"
+                  }
+                >
+                  {expense.status}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
+      </div>
     </div>
-  )
+  );
 }

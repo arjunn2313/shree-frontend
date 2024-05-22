@@ -1,3 +1,24 @@
 .designer{
     margin-top:5%;
 }
+.designer-img{
+    height: 520px;
+}
+@media (max-width : 475px){
+    .designer-heading h2{
+        font-size: 23px;
+    }
+    .designer-heading p{
+        font-size: 15px;
+    }
+    #designer-description{
+        font-size: 12px;
+    }
+    .designer-img{
+       height: 320px;
+    }
+    .designer-content{
+        font-size: 10px;
+       color: rgba(0, 0, 0, 0.738);
+    }
+}
